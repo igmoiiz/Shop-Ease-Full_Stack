@@ -1,6 +1,9 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:auth_screens/Controllers/Authentication/auth_services.dart';
 import 'package:auth_screens/View/ChatBot/chatbot_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InterfacePage extends StatefulWidget {
   const InterfacePage({super.key});
@@ -14,19 +17,96 @@ class _InterfacePageState extends State<InterfacePage> {
   final AuthServices authServices = AuthServices();
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+      endDrawer: Drawer(
+        backgroundColor: Colors.grey.shade100,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.yellow.shade700),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "Shop Ease",
+                    style: TextStyle(
+                      color: Colors.black,
+                      letterSpacing: 2,
+                      fontSize: height * 0.03,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: GoogleFonts.lobsterTwo().fontFamily,
+                    ),
+                  ),
+                  Text(
+                    "One stop shop for all needs",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: height * 0.018,
+                      fontFamily: GoogleFonts.poppins().fontFamily,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Add drawer items here
+          ],
+        ),
+      ),
+
+      //  APP BAR
       appBar: AppBar(
-        backgroundColor: Colors.yellow.shade700,
+        backgroundColor: Colors.grey.shade100,
+        iconTheme: IconThemeData(color: Colors.yellow.shade800),
+
         automaticallyImplyLeading: false,
-        title: Text("Interface Page"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              authServices.signOutAndEndSession(context);
-            },
-            icon: Icon(Icons.logout),
-          ),
-        ],
+        title: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.yellow.shade800.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.shopping_bag, color: Colors.yellow.shade800),
+            ),
+            SizedBox(width: 10),
+            Text(
+              "Shop Ease",
+              style: TextStyle(
+                fontFamily: GoogleFonts.lobsterTwo().fontFamily,
+                color: Colors.yellow.shade800,
+                fontWeight: FontWeight.bold,
+                letterSpacing: .5,
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      //  BODY
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.02,
+          vertical: height * 0.02,
+        ),
+        child: ListView(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: "Search for products",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
 
       //  Floating Action Button

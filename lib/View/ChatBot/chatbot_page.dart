@@ -40,7 +40,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      drawer: Drawer(
+      endDrawer: Drawer(
         backgroundColor: Colors.white,
         child: ListView(
           padding: EdgeInsets.zero,
@@ -91,6 +91,12 @@ class _ChatbotPageState extends State<ChatbotPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.yellow.shade800),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new),
+        ),
         title: Row(
           children: [
             Container(
@@ -114,14 +120,6 @@ class _ChatbotPageState extends State<ChatbotPage> {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.nightlight_round, color: Colors.yellow.shade800),
-            onPressed: () {
-              // Theme toggle functionality
-            },
-          ),
-        ],
       ),
       //  BODY
       body: Column(
