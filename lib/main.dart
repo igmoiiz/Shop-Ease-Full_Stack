@@ -1,7 +1,10 @@
 import 'dart:developer';
 
-import 'package:auth_screens/View/Authentication/login.dart';
+import 'package:auth_screens/Controllers/Chatbot/chat_bot_controller.dart';
+import 'package:auth_screens/View/Auth_Gate/auth_gate.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -15,12 +18,19 @@ Future<void> main() async {
   await Supabase.initialize(url: url, anonKey: anonKey)
       .then((value) {
         log("Supabase Initialization Completed");
+        runApp(
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (context) => ChatbotController()),
+            ],
+            child: const MainApp(),
+          ),
+        );
       })
       .onError((error, stackTrace) {
         log("Supabase Initialization Failed!");
       });
   //  RUN THE APPLICATION
-  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -28,6 +38,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LoginPage());
+    return MaterialApp(
+      theme: ThemeData(
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        useMaterial3: true,
+      ),
+      home: const AuthGate(),
+    );
   }
 }

@@ -5,6 +5,7 @@ class InputControllers {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
 }

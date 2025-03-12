@@ -122,4 +122,14 @@ class AuthServices {
       log(error.toString());
     }
   }
+
+  //  Getting current User email
+  String? getCurrentUserEmail() {
+    final session = supabase.auth.currentSession;
+    if (session != null) {
+      return session.user.email;
+    } else {
+      return "Error: No Session Found";
+    }
+  }
 }
