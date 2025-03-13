@@ -123,6 +123,7 @@ class _InterfacePageState extends State<InterfacePage> {
         iconTheme: IconThemeData(color: Colors.yellow.shade800),
 
         automaticallyImplyLeading: false,
+        elevation: 0.0,
         title: Row(
           children: [
             Container(
