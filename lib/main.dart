@@ -2,37 +2,52 @@ import 'dart:developer';
 
 import 'package:auth_screens/Controllers/API%20Services/Chatbot/chat_bot_controller.dart';
 import 'package:auth_screens/Controllers/API%20Services/Thrift%20Store/api_services.dart';
-import 'package:auth_screens/View/Auth_Gate/auth_gate.dart';
+import 'package:auth_screens/Controllers/Database/database_services.dart';
+import 'package:auth_screens/View/Auth%20Gate/auth_gate.dart';
+import 'package:auth_screens/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
-  //  VARIABLES FOR SUPABASE INITIALIZATION
+  WidgetsFlutterBinding.ensureInitialized();
+  //  Supabase Variables
   const url = "https://vfazqatlbiewmmsbiboh.supabase.co";
   const anonKey =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmYXpxYXRsYmlld21tc2JpYm9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE3MDU3NzEsImV4cCI6MjA1NzI4MTc3MX0.dc8TlRM38luvir8W4d7F0bN2DcmzmBzEvpOxsf-yFUE";
-  //  INITIALIZE THE WIDGET BINDING
-  WidgetsFlutterBinding.ensureInitialized();
-  //  SUPABASE INITIALIZATION
-  await Supabase.initialize(url: url, anonKey: anonKey)
+  //  Firebase Setup
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {
-        log("Supabase Initialization Completed");
-        runApp(
-          MultiProvider(
-            providers: [
-              ChangeNotifierProvider(create: (context) => ChatbotController()),
-              ChangeNotifierProvider(create: (context) => ApiServices()),
-            ],
-            child: const MainApp(),
-          ),
-        );
+        log("Firebase Setup Completed. Initializing Supabase");
+        //  Supabase Setup
+        Supabase.initialize(url: url, anonKey: anonKey)
+            .then((value) {
+              log("Supabase initialization completed. Running the application");
+              //  Run the application
+              runApp(
+                MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(
+                      create: (context) => ChatbotController(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => DatabaseServices(),
+                    ),
+                    ChangeNotifierProvider(create: (context) => ApiServices()),
+                  ],
+                  child: const MainApp(),
+                ),
+              );
+            })
+            .onError((error, stackTrace) {
+              log("Supabase initialization failed; $error");
+            });
       })
       .onError((error, stackTrace) {
-        log("Supabase Initialization Failed!");
+        log("Firebase initialization failed; $error");
       });
-  //  RUN THE APPLICATION
 }
 
 class MainApp extends StatelessWidget {

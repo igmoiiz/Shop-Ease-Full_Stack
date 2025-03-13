@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "374369228221",
+    "project_id": "shop-ease-bc288",
+    "storage_bucket": "shop-ease-bc288.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374369228221:android:f9d74d252fe4ac24a6eed4",
+        "android_client_info": {
+          "package_name": "com.example.admin_shop_ease"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC09k0xabUc8WnADfIghnFwnEb1tUReHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374369228221:android:396bd70ed70a16a3a6eed4",
+        "android_client_info": {
+          "package_name": "com.example.auth_screens"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC09k0xabUc8WnADfIghnFwnEb1tUReHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:auth_screens/Controllers/API%20Services/Thrift%20Store/api_services.dart';
+import 'package:auth_screens/Controllers/input_controllers.dart';
 import 'package:auth_screens/Model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -16,10 +17,9 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  // Controllers and state variables
-  final TextEditingController _searchController = TextEditingController();
-  final List<Product> _cartItems = [];
-  String _sortOption = 'Default';
+  //  Instance for Input Controller
+  final InputControllers inputController = InputControllers();
+  // state variables
 
   // Cache for products to avoid unnecessary API calls
   List<Product>? _cachedProducts;
@@ -31,7 +31,7 @@ class _ProductPageState extends State<ProductPage> {
   void initState() {
     super.initState();
     // Add listener to search controller for efficient filtering
-    _searchController.addListener(_filterProducts);
+    inputController.searchController.addListener(_filterProducts);
     // Initial data fetch
     _fetchProducts();
   }
@@ -39,8 +39,8 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void dispose() {
     // Clean up resources
-    _searchController.removeListener(_filterProducts);
-    _searchController.dispose();
+    inputController.searchController.removeListener(_filterProducts);
+    inputController.searchController.dispose();
     super.dispose();
   }
 
@@ -75,7 +75,7 @@ class _ProductPageState extends State<ProductPage> {
   void _filterProducts() {
     if (_cachedProducts == null) return;
 
-    final searchText = _searchController.text.toLowerCase();
+    final searchText = inputController.searchController.text.toLowerCase();
 
     setState(() {
       // Filter by search text
@@ -91,7 +91,7 @@ class _ProductPageState extends State<ProductPage> {
 
   // Sort products based on selected option
   void _sortProducts() {
-    switch (_sortOption) {
+    switch (inputController.sortOption) {
       case 'Price: Low to High':
         _filteredProducts.sort((a, b) => a.price.compareTo(b.price));
         break;
@@ -112,7 +112,7 @@ class _ProductPageState extends State<ProductPage> {
   // Add product to cart with optimized state update
   void _addToCart(Product product) {
     setState(() {
-      _cartItems.add(product);
+      inputController.cartItems.add(product);
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -150,10 +150,12 @@ class _ProductPageState extends State<ProductPage> {
       content: SizedBox(
         width: double.maxFinite,
         child:
-            _cartItems.isEmpty ? _buildEmptyCartView() : _buildCartItemsList(),
+            inputController.cartItems.isEmpty
+                ? _buildEmptyCartView()
+                : _buildCartItemsList(),
       ),
       actions: [
-        if (_cartItems.isNotEmpty) ...[
+        if (inputController.cartItems.isNotEmpty) ...[
           Text(
             "Total: \$${_calculateTotal().toStringAsFixed(2)}",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -164,7 +166,7 @@ class _ProductPageState extends State<ProductPage> {
           onPressed: () => Navigator.pop(context),
           child: const Text("Close"),
         ),
-        if (_cartItems.isNotEmpty)
+        if (inputController.cartItems.isNotEmpty)
           ElevatedButton(
             onPressed: _handleCheckout,
             style: ElevatedButton.styleFrom(
@@ -179,7 +181,7 @@ class _ProductPageState extends State<ProductPage> {
 
   // Calculate cart total
   double _calculateTotal() {
-    return _cartItems.fold(0.0, (sum, item) => sum + item.price);
+    return inputController.cartItems.fold(0.0, (sum, item) => sum + item.price);
   }
 
   // Empty cart view
@@ -207,9 +209,9 @@ class _ProductPageState extends State<ProductPage> {
   Widget _buildCartItemsList() {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: _cartItems.length,
+      itemCount: inputController.cartItems.length,
       itemBuilder: (context, index) {
-        final item = _cartItems[index];
+        final item = inputController.cartItems[index];
         return ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(4),
@@ -253,10 +255,10 @@ class _ProductPageState extends State<ProductPage> {
   // Remove item from cart
   void _removeCartItem(int index) {
     setState(() {
-      _cartItems.removeAt(index);
+      inputController.cartItems.removeAt(index);
     });
     Navigator.pop(context);
-    if (_cartItems.isNotEmpty) {
+    if (inputController.cartItems.isNotEmpty) {
       _showCartDialog();
     }
   }
@@ -358,7 +360,7 @@ class _ProductPageState extends State<ProductPage> {
               onPressed: _showCartDialog,
               icon: Icon(Icons.shopping_cart, color: Colors.yellow.shade800),
             ),
-            if (_cartItems.isNotEmpty)
+            if (inputController.cartItems.isNotEmpty)
               Positioned(
                 top: 8,
                 right: 8,
@@ -369,7 +371,7 @@ class _ProductPageState extends State<ProductPage> {
                     shape: BoxShape.circle,
                   ),
                   child: Text(
-                    _cartItems.length.toString(),
+                    inputController.cartItems.length.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 10,
@@ -389,7 +391,7 @@ class _ProductPageState extends State<ProductPage> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: width * 0.05),
       child: TextField(
-        controller: _searchController,
+        controller: inputController.searchController,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -407,11 +409,11 @@ class _ProductPageState extends State<ProductPage> {
           labelStyle: const TextStyle(color: Colors.black),
           prefixIcon: Icon(Icons.search, color: Colors.yellow.shade800),
           suffixIcon:
-              _searchController.text.isNotEmpty
+              inputController.searchController.text.isNotEmpty
                   ? IconButton(
                     icon: const Icon(Icons.clear),
                     onPressed: () {
-                      _searchController.clear();
+                      inputController.searchController.clear();
                     },
                   )
                   : null,
@@ -446,7 +448,7 @@ class _ProductPageState extends State<ProductPage> {
             border: Border.all(color: Colors.grey.shade400),
           ),
           child: DropdownButton<String>(
-            value: _sortOption,
+            value: inputController.sortOption,
             underline: const SizedBox(),
             icon: Icon(Icons.sort, color: Colors.yellow.shade800),
             items: const [
@@ -465,9 +467,9 @@ class _ProductPageState extends State<ProductPage> {
               DropdownMenuItem<String>(value: 'Rating', child: Text("Rating")),
             ],
             onChanged: (value) {
-              if (value != null && value != _sortOption) {
+              if (value != null && value != inputController.sortOption) {
                 setState(() {
-                  _sortOption = value;
+                  inputController.sortOption = value;
                   _sortProducts();
                 });
               }

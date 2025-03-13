@@ -5,6 +5,7 @@ import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/View/ChatBot/chatbot_page.dart';
 import 'package:auth_screens/View/Components/category_tile.dart';
 import 'package:auth_screens/View/Components/large_category_tile.dart';
+import 'package:auth_screens/View/Interface/Featured%20Categories/featured_products.dart';
 import 'package:auth_screens/View/Interface/product_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -252,7 +253,10 @@ class _InterfacePageState extends State<InterfacePage> {
                     child: LargeCategoryTile(
                       backgroundImage:
                           interfaceController.largeCategoryItems[index],
-                      onTap: () {},
+                      onTap:
+                          () => Navigator.of(
+                            context,
+                          ).push(_elegantRoute(FeaturedProducts())),
                       title: interfaceController.largeCategoryTitles[index],
                     ),
                   );
