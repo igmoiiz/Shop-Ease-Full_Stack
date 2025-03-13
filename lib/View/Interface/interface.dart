@@ -121,7 +121,6 @@ class _InterfacePageState extends State<InterfacePage> {
       appBar: AppBar(
         backgroundColor: Colors.grey.shade100,
         iconTheme: IconThemeData(color: Colors.yellow.shade800),
-
         automaticallyImplyLeading: false,
         elevation: 0.0,
         title: Row(
