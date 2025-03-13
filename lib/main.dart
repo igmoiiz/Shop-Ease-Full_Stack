@@ -1,6 +1,7 @@
 import 'dart:developer';
 
-import 'package:auth_screens/Controllers/Chatbot/chat_bot_controller.dart';
+import 'package:auth_screens/Controllers/API%20Services/Chatbot/chat_bot_controller.dart';
+import 'package:auth_screens/Controllers/API%20Services/Thrift%20Store/api_services.dart';
 import 'package:auth_screens/View/Auth_Gate/auth_gate.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
           MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (context) => ChatbotController()),
+              ChangeNotifierProvider(create: (context) => ApiServices()),
             ],
             child: const MainApp(),
           ),

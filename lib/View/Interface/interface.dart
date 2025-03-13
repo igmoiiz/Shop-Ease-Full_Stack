@@ -5,6 +5,7 @@ import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/View/ChatBot/chatbot_page.dart';
 import 'package:auth_screens/View/Components/category_tile.dart';
 import 'package:auth_screens/View/Components/large_category_tile.dart';
+import 'package:auth_screens/View/Interface/product_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -210,9 +211,13 @@ class _InterfacePageState extends State<InterfacePage> {
                   onPressed: () {},
                 ),
                 CategoryTile(
-                  icon: Icons.brush,
-                  text: "Cosmetics",
-                  onPressed: () {},
+                  icon: Icons.shopping_bag_outlined,
+                  text: "Thrift Store",
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).push(_elegantRoute(ProductPage(title: "Thrift Store")));
+                  },
                 ),
                 CategoryTile(
                   icon: Icons.house,

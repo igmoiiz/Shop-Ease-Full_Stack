@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use, invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'package:auth_screens/Controllers/Chatbot/chat_bot_controller.dart';
+import 'package:auth_screens/Controllers/API%20Services/Chatbot/chat_bot_controller.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

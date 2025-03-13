@@ -24,7 +24,7 @@ class CategoryTile extends StatelessWidget {
           width: width * 0.15,
           decoration: BoxDecoration(
             color: Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(100),
+            shape: BoxShape.circle,
             border: Border.all(color: Colors.grey.shade400),
           ),
           child: IconButton(
@@ -42,6 +42,5 @@ class CategoryTile extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

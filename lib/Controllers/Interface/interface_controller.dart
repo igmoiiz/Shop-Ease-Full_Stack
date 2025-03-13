@@ -11,6 +11,7 @@ class InterfaceController {
   //  List of images for large category tiles on interface page
   List<String> largeCategoryItems = [
     "Assets/Categories/Clothing.jpeg",
+    "Assets/Categories/Cosmetics.jpeg",
     "Assets/Categories/Female Footwear.jpeg",
     "Assets/Categories/Male Footwear.jpeg",
     "Assets/Categories/Female Accessories.jpeg",
@@ -19,12 +20,12 @@ class InterfaceController {
     "Assets/Categories/Women Clothing.jpeg",
     "Assets/Categories/Furniture.jpeg",
     "Assets/Categories/Smoke.jpeg",
-    "Assets/Categories/Thrift Store.jpeg",
   ];
 
   //  List of titles for large category tiles on interface page
   List<String> largeCategoryTitles = [
     "Clothing",
+    "Cosmetics",
     "Female Footwear",
     "Male Footwear",
     "Female Gear",
@@ -33,6 +34,5 @@ class InterfaceController {
     "Women Wear",
     "Furniture",
     "Smoke",
-    "Thrift Store",
   ];
 }
