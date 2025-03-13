@@ -7,6 +7,7 @@ environment:
   sdk: ^3.7.0
 
 dependencies:
+  carousel_slider: ^5.0.0
   flutter:
     sdk: flutter
   google_fonts: ^6.2.1
@@ -21,3 +22,24 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - Assets/Carousel/carousel1.jpg
+    - Assets/Carousel/carousel2.jpg
+    - Assets/Carousel/carousel3.jpg
+    - Assets/Carousel/carousel4.jpg
+    - Assets/Carousel/carousel5.jpg
+    - Assets/Categories/Clothing.jpeg
+    - Assets/Categories/Cosmetics.jpeg
+    - Assets/Categories/Electronic Accessories.jpeg
+    - Assets/Categories/Household Products.jpeg
+    - Assets/Categories/Female Footwear.jpeg
+    - Assets/Categories/Male Footwear.jpeg
+    - Assets/Categories/Female Accessories.jpeg
+    - Assets/Categories/Male Accessories.jpeg
+    - Assets/Categories/Men Clothing.jpeg
+    - Assets/Categories/Women Clothing.jpeg
+    - Assets/Categories/Smoke.jpeg
+    - Assets/Categories/Thrift Store.jpeg
+    - Assets/Categories/Furniture.jpeg
+
