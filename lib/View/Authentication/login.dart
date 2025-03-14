@@ -256,7 +256,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                               children: [
                                 Center(
                                   child: Text(
-                                    'Sign in',
+                                    'Sign In',
                                     style: Theme.of(
                                       context,
                                     ).textTheme.headlineMedium?.copyWith(
