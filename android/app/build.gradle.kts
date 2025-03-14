@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // START: FlutterFire Configuration
@@ -7,10 +10,6 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
-
-// Add explicit imports
-import java.util.Properties
-import java.io.FileInputStream
 
 // Add this block to load keystore properties
 val keystorePropertiesFile = rootProject.file("key.properties")
@@ -48,20 +47,18 @@ android {
     
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String?
-            keyPassword = keystoreProperties["keyPassword"] as String?
-            
-            val storeFilePath = keystoreProperties["storeFile"] as String?
-            storeFile = storeFilePath?.let { file(it) } ?: file("default.keystore") // Ensure a valid file is set
-            
-            storePassword = keystoreProperties["storePassword"] as String?
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
         }
     }
     
     buildTypes {
-        release {
-            // Use the release signing configuration
+        getByName("release") {
+            isMinifyEnabled = true
             signingConfig = signingConfigs.getByName("release")
+            // Other release configurations...
         }
     }
 }
