@@ -431,13 +431,11 @@ class _ProductPageState extends State<ProductPage> {
 
   // Products grid
   Widget _buildProductsGrid() {
-    return MasonryGridView.builder(
-      gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
       itemCount: _filteredProducts.length,
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
       itemBuilder:
           (context, index) => _buildProductCard(_filteredProducts[index]),
     );
