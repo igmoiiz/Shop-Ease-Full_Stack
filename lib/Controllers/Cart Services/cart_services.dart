@@ -26,7 +26,7 @@ class CartServices extends ChangeNotifier {
     );
   }
 
-  // Add item to cart
+  // Add item to cart with animation feedback
   void addToCart(FeaturedProduct product, {int quantity = 1}) {
     // Check if item already exists in cart
     final existingItemIndex = _cartItems.indexWhere(
@@ -50,10 +50,8 @@ class CartServices extends ChangeNotifier {
       );
     }
 
-    // Notify listeners about the change
+    // Only notify once after all operations are complete
     notifyListeners();
-
-    // Show success animation or feedback can be triggered from UI
   }
 
   // Remove item from cart
@@ -174,5 +172,28 @@ class CartServices extends ChangeNotifier {
       debugPrint('Error during checkout: $e');
       return false;
     }
+  }
+
+  // Add batch operations to reduce rebuilds
+  void updateCartItems(List<CartItem> items) {
+    _cartItems.clear();
+    _cartItems.addAll(items);
+    notifyListeners();
+  }
+
+  // Add method to handle cart operations without UI updates
+  void _updateCartItemWithoutNotify(String productId, int quantity) {
+    final index = _cartItems.indexWhere((item) => item.id == productId);
+    if (index >= 0) {
+      _cartItems[index].quantity = quantity;
+    }
+  }
+
+  // Batch update multiple items at once
+  void batchUpdateQuantities(Map<String, int> updates) {
+    updates.forEach((productId, quantity) {
+      _updateCartItemWithoutNotify(productId, quantity);
+    });
+    notifyListeners(); // Single notification after all updates
   }
 }

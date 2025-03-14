@@ -11,8 +11,6 @@ import 'package:auth_screens/View/Interface/product_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:auth_screens/Controllers/Cart%20Services/cart_services.dart';
-import 'package:auth_screens/View/Cart/cart_page.dart';
 import 'package:provider/provider.dart';
 
 class InterfacePage extends StatefulWidget {
@@ -25,277 +23,290 @@ class InterfacePage extends StatefulWidget {
 class _InterfacePageState extends State<InterfacePage> {
   //  Instance for Auth Services
   final AuthServices authServices = AuthServices();
-  //  Instance for Interface Controller
-  final InterfaceController interfaceController = InterfaceController();
+
+  // Use lazy loading for better performance
+  late final InterfaceController interfaceController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize controller in initState
+    interfaceController = Provider.of<InterfaceController>(
+      context,
+      listen: false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      drawer: Drawer(
-        backgroundColor: Colors.grey.shade100,
-        child: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: DrawerHeader(
-                decoration: BoxDecoration(color: Colors.yellow.shade700),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Shop Ease",
-                      style: TextStyle(
-                        color: Colors.black,
-                        letterSpacing: 2,
-                        fontSize: height * 0.03,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: GoogleFonts.lobsterTwo().fontFamily,
-                      ),
+      drawer: _buildDrawer(size),
+      appBar: _buildAppBar() as PreferredSizeWidget,
+      body: _buildBody(size),
+      floatingActionButton: _buildFloatingActionButton(),
+    );
+  }
+
+  Widget _buildDrawer(Size size) {
+    return Drawer(
+      backgroundColor: Colors.grey.shade100,
+      child: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: DrawerHeader(
+              decoration: BoxDecoration(color: Colors.yellow.shade700),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "Shop Ease",
+                    style: TextStyle(
+                      color: Colors.black,
+                      letterSpacing: 2,
+                      fontSize: size.height * 0.03,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: GoogleFonts.lobsterTwo().fontFamily,
                     ),
-                    Text(
-                      "One stop shop for all needs",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: height * 0.018,
-                        fontFamily: GoogleFonts.poppins().fontFamily,
-                      ),
+                  ),
+                  Text(
+                    "One stop shop for all needs",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: size.height * 0.018,
+                      fontFamily: GoogleFonts.poppins().fontFamily,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            Spacer(),
-            Divider(),
-            // Add drawer items here
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 10,
+          ),
+          const Spacer(),
+          const Divider(),
+          // Add drawer items here
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+            child: ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.amber.shade50,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  Icons.logout_rounded,
+                  color: Colors.orange.shade800,
+                  size: 26,
+                ),
               ),
-              child: ListTile(
-                leading: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.amber.shade50,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(
-                    Icons.logout_rounded,
-                    color: Colors.orange.shade800,
-                    size: 26,
-                  ),
+              title: const Text(
+                "Sign Out",
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
                 ),
-                title: const Text(
-                  "Sign Out",
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                  ),
-                ),
-                subtitle: const Text(
-                  "Good Bye!",
-                  style: TextStyle(color: Colors.black54, fontSize: 12),
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.grey.shade400,
-                  size: 16,
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 8,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  side: BorderSide(color: Colors.grey.shade200),
-                ),
-                tileColor: Colors.white,
-                onTap: () {
-                  authServices.signOutAndEndSession(context);
+              ),
+              subtitle: const Text(
+                "Good Bye!",
+                style: TextStyle(color: Colors.black54, fontSize: 12),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.grey.shade400,
+                size: 16,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 8,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: BorderSide(color: Colors.grey.shade200),
+              ),
+              tileColor: Colors.white,
+              onTap: () {
+                authServices.signOutAndEndSession(context);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.grey.shade100,
+      iconTheme: IconThemeData(color: Colors.yellow.shade800),
+      elevation: 0.0,
+      title: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.yellow.shade800.withOpacity(0.2),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(Icons.shopping_bag, color: Colors.yellow.shade800),
+          ),
+          SizedBox(width: 10),
+          Text(
+            "Shop Ease",
+            style: TextStyle(
+              fontFamily: GoogleFonts.lobsterTwo().fontFamily,
+              color: Colors.yellow.shade800,
+              fontWeight: FontWeight.bold,
+              letterSpacing: .5,
+            ),
+          ),
+        ],
+      ),
+      actions: [CartIcon()],
+    );
+  }
+
+  Widget _buildBody(Size size) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: size.width * 0.025,
+        vertical: size.height * 0.02,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CarouselSlider(
+            items:
+                interfaceController.carouselItems
+                    .map(
+                      (items) => Container(
+                        margin: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          child: Image.asset(
+                            items,
+                            fit: BoxFit.cover,
+                            width: 1000.0,
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+            options: CarouselOptions(
+              height: 180.0,
+              enlargeCenterPage: true,
+              autoPlay: true,
+              aspectRatio: 16 / 9,
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enableInfiniteScroll: true,
+              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              viewportFraction: 0.9,
+            ),
+          ),
+          SizedBox(height: size.height * 0.02),
+          Text(
+            "New Arrivals",
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.65),
+              fontWeight: FontWeight.bold,
+              letterSpacing: .5,
+              fontSize: size.height * 0.03,
+              fontFamily: GoogleFonts.outfit().fontFamily,
+            ),
+          ),
+          SizedBox(height: size.height * 0.015),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CategoryTile(
+                icon: Icons.electrical_services,
+                text: "Electric Accesssories",
+                onPressed:
+                    () => Navigator.of(context).push(
+                      _elegantRoute(
+                        FeaturedProducts(category: "Electronic Accessories"),
+                      ),
+                    ),
+              ),
+              CategoryTile(
+                icon: Icons.shopping_bag_outlined,
+                text: "Thrift Store",
+                onPressed: () {
+                  Navigator.of(
+                    context,
+                  ).push(_elegantRoute(ProductPage(title: "Thrift Store")));
                 },
               ),
-            ),
-          ],
-        ),
-      ),
-
-      //  APP BAR
-      appBar: AppBar(
-        backgroundColor: Colors.grey.shade100,
-        iconTheme: IconThemeData(color: Colors.yellow.shade800),
-        // automaticallyImplyLeading: false,
-        elevation: 0.0,
-        title: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.yellow.shade800.withOpacity(0.2),
-                shape: BoxShape.circle,
+              CategoryTile(
+                icon: Icons.house,
+                text: "Household Products",
+                onPressed:
+                    () => Navigator.of(context).push(
+                      _elegantRoute(
+                        FeaturedProducts(category: "Household Products"),
+                      ),
+                    ),
               ),
-              child: Icon(Icons.shopping_bag, color: Colors.yellow.shade800),
+            ],
+          ),
+          SizedBox(height: size.height * 0.02),
+          Text(
+            "Featured Categories",
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.65),
+              fontWeight: FontWeight.bold,
+              letterSpacing: .5,
+              fontSize: size.height * 0.03,
+              fontFamily: GoogleFonts.outfit().fontFamily,
             ),
-            SizedBox(width: 10),
-            Text(
-              "Shop Ease",
-              style: TextStyle(
-                fontFamily: GoogleFonts.lobsterTwo().fontFamily,
-                color: Colors.yellow.shade800,
-                fontWeight: FontWeight.bold,
-                letterSpacing: .5,
-              ),
-            ),
-          ],
-        ),
-        actions: [CartIcon()],
-      ),
+          ),
 
-      //  BODY
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: width * 0.025,
-          vertical: height * 0.02,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //  Carousel View
-            CarouselSlider(
-              items:
-                  interfaceController.carouselItems
-                      .map(
-                        (items) => Container(
-                          margin: EdgeInsets.all(5.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5.0),
-                            ),
-                            child: Image.asset(
-                              items,
-                              fit: BoxFit.cover,
-                              width: 1000.0,
+          Expanded(
+            child: GridView.builder(
+              itemCount: interfaceController.largeCategoryItems.length,
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: LargeCategoryTile(
+                    backgroundImage:
+                        interfaceController.largeCategoryItems[index],
+                    onTap:
+                        () => Navigator.of(context).push(
+                          _elegantRoute(
+                            FeaturedProducts(
+                              category:
+                                  interfaceController
+                                      .largeCategoryTitles[index],
                             ),
                           ),
                         ),
-                      )
-                      .toList(),
-              options: CarouselOptions(
-                height: 180.0,
-                enlargeCenterPage: true,
-                autoPlay: true,
-                aspectRatio: 16 / 9,
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enableInfiniteScroll: true,
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                viewportFraction: 0.9,
-              ),
+                    title: interfaceController.largeCategoryTitles[index],
+                  ),
+                );
+              },
             ),
-            SizedBox(height: height * 0.02),
-            //  Featured Categories Heading
-            Text(
-              "New Arrivals",
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.65),
-                fontWeight: FontWeight.bold,
-                letterSpacing: .5,
-                fontSize: height * 0.03,
-                fontFamily: GoogleFonts.outfit().fontFamily,
-              ),
-            ),
-            SizedBox(height: height * 0.015),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CategoryTile(
-                  icon: Icons.electrical_services,
-                  text: "Electric Accesssories",
-                  onPressed:
-                      () => Navigator.of(context).push(
-                        _elegantRoute(
-                          FeaturedProducts(category: "Electronic Accessories"),
-                        ),
-                      ),
-                ),
-                CategoryTile(
-                  icon: Icons.shopping_bag_outlined,
-                  text: "Thrift Store",
-                  onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).push(_elegantRoute(ProductPage(title: "Thrift Store")));
-                  },
-                ),
-                CategoryTile(
-                  icon: Icons.house,
-                  text: "Household Products",
-                  onPressed:
-                      () => Navigator.of(context).push(
-                        _elegantRoute(
-                          FeaturedProducts(category: "Household Products"),
-                        ),
-                      ),
-                ),
-              ],
-            ),
-            SizedBox(height: height * 0.02),
-            Text(
-              "Featured Categories",
-              style: TextStyle(
-                color: Colors.black.withOpacity(0.65),
-                fontWeight: FontWeight.bold,
-                letterSpacing: .5,
-                fontSize: height * 0.03,
-                fontFamily: GoogleFonts.outfit().fontFamily,
-              ),
-            ),
-
-            //  Grid View for Categories
-            Expanded(
-              child: GridView.builder(
-                itemCount: interfaceController.largeCategoryItems.length,
-                scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: LargeCategoryTile(
-                      backgroundImage:
-                          interfaceController.largeCategoryItems[index],
-                      onTap:
-                          () => Navigator.of(context).push(
-                            _elegantRoute(
-                              FeaturedProducts(
-                                category:
-                                    interfaceController
-                                        .largeCategoryTitles[index],
-                              ),
-                            ),
-                          ),
-                      title: interfaceController.largeCategoryTitles[index],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
 
-      //  Floating Action Button
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.yellow.shade700,
-        onPressed: () {
-          Navigator.of(context).push(_elegantRoute(ChatbotPage()));
-        },
-        child: Icon(Icons.chat_rounded, color: Colors.white),
-      ),
+  Widget _buildFloatingActionButton() {
+    return FloatingActionButton(
+      backgroundColor: Colors.yellow.shade700,
+      onPressed: () {
+        Navigator.of(context).push(_elegantRoute(ChatbotPage()));
+      },
+      child: Icon(Icons.chat_rounded, color: Colors.white),
     );
   }
 
