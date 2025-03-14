@@ -2,9 +2,11 @@
 
 import 'package:auth_screens/Controllers/Authentication/auth_services.dart';
 import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
+import 'package:auth_screens/View/Cart/cart_page.dart';
 import 'package:auth_screens/View/ChatBot/chatbot_page.dart';
 import 'package:auth_screens/View/Components/cart_icon.dart';
 import 'package:auth_screens/View/Components/category_tile.dart';
+import 'package:auth_screens/View/Components/drawer_component.dart';
 import 'package:auth_screens/View/Components/large_category_tile.dart';
 import 'package:auth_screens/View/Interface/Featured%20Categories/featured_products.dart';
 import 'package:auth_screens/View/Interface/product_page.dart';
@@ -85,54 +87,68 @@ class _InterfacePageState extends State<InterfacePage> {
               ),
             ),
           ),
+          DrawerComponent(
+            title: "View your Cart",
+            icon: Icons.shopping_cart_rounded,
+            onTap:
+                () => Navigator.of(
+                  context,
+                ).push(_elegantRoute(CartPage())).then((value) {
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pop();
+                }),
+            subtitle: "See what's in your wishlist",
+          ),
           const Spacer(),
           const Divider(),
           // Add drawer items here
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-            child: ListTile(
-              leading: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.amber.shade50,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  Icons.logout_rounded,
-                  color: Colors.orange.shade800,
-                  size: 26,
-                ),
-              ),
-              title: const Text(
-                "Sign Out",
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-              ),
-              subtitle: const Text(
-                "Good Bye!",
-                style: TextStyle(color: Colors.black54, fontSize: 12),
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.grey.shade400,
-                size: 16,
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 8,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: BorderSide(color: Colors.grey.shade200),
-              ),
-              tileColor: Colors.white,
-              onTap: () {
-                authServices.signOutAndEndSession(context);
-              },
-            ),
+          DrawerComponent(
+            title: "Sign Out",
+            icon: Icons.logout_rounded,
+            onTap:
+                () => authServices
+                    .signOutAndEndSession(context)
+                    .then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          backgroundColor: Colors.green.shade700,
+                          content: Text(
+                            "Hope to see you soon!",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: .5,
+                              fontFamily: GoogleFonts.urbanist().fontFamily,
+                            ),
+                          ),
+                        ),
+                      );
+                    })
+                    .onError((error, stackTrace) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          backgroundColor: Colors.red.shade700,
+                          content: Text(
+                            "Error Occurred: $error",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: .5,
+                              fontFamily: GoogleFonts.urbanist().fontFamily,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+            subtitle: "See you Soon!",
           ),
         ],
       ),
