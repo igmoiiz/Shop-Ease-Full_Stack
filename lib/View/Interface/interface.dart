@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
 import 'package:auth_screens/Controllers/Authentication/auth_services.dart';
 import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
@@ -94,7 +94,6 @@ class _InterfacePageState extends State<InterfacePage> {
                 () => Navigator.of(
                   context,
                 ).push(_elegantRoute(CartPage())).then((value) {
-                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pop();
                 }),
             subtitle: "See what's in your wishlist",

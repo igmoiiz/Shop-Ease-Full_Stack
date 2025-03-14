@@ -7,6 +7,7 @@ import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
 import 'package:auth_screens/View/Cart/cart_page.dart';
 import 'package:auth_screens/View/Components/cart_icon.dart';
+import 'package:auth_screens/View/Interface/Featured%20Categories/featured_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -285,165 +286,188 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
     );
 
     // Use Consumer only for the part that needs to rebuild
-    return Card(
-      elevation: 2,
-      shadowColor: Colors.black26,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Product image with loading indicator
-          _buildProductImage(doc),
-
-          // Product details
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap:
+          () => Navigator.of(context).push(
+            PageRouteBuilder(
+              pageBuilder:
+                  (context, animation, secondaryAnimation) =>
+                      FeaturedProductDetails(product: product),
+              transitionDuration: const Duration(milliseconds: 500),
+              transitionsBuilder: (
+                context,
+                animation,
+                secondaryAnimation,
+                child,
+              ) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            ),
+          ),
+      child: Card(
+        elevation: 2,
+        shadowColor: Colors.black26,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Product image with Hero animation
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(12),
+              ),
+              child: Stack(
                 children: [
-                  // Title
-                  Text(
-                    doc['title'] ?? '',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      fontFamily: GoogleFonts.outfit().fontFamily,
+                  Hero(
+                    tag: 'featured_${product.id}',
+                    child: Image.network(
+                      doc["image"] ?? '',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 140,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return Container(
+                          height: 140,
+                          width: double.infinity,
+                          color: Colors.grey.shade200,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              value:
+                                  loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                              color: Colors.yellow.shade800,
+                              strokeWidth: 3,
+                            ),
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          height: 140,
+                          width: double.infinity,
+                          color: Colors.grey.shade200,
+                          child: const Icon(
+                            Icons.image_not_supported,
+                            color: Colors.grey,
+                            size: 50,
+                          ),
+                        );
+                      },
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 6),
-
-                  // Price
-                  Text(
-                    "Rs.${doc['price'] ?? 0.0}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.yellow.shade900,
-                      fontFamily: GoogleFonts.outfit().fontFamily,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-
-                  // Description
-                  Expanded(
-                    child: Text(
-                      doc['description'] ?? '',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade700,
+                  // Category badge
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
                       ),
-                      maxLines: 3,
+                      decoration: BoxDecoration(
+                        color: Colors.yellow.shade800,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        doc['category'] ?? widget.category,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Product details
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title
+                    Text(
+                      doc['title'] ?? '',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        fontFamily: GoogleFonts.outfit().fontFamily,
+                      ),
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
+                    const SizedBox(height: 6),
 
-                  // Add to cart button - use Consumer only for this part
-                  Consumer<CartServices>(
-                    builder: (context, cartServices, _) {
-                      final isInCart = cartServices.isInCart(product.id);
-                      final quantity = cartServices.getQuantity(product.id);
+                    // Price
+                    Text(
+                      "Rs.${doc['price'] ?? 0.0}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.yellow.shade900,
+                        fontFamily: GoogleFonts.outfit().fontFamily,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
 
-                      return SizedBox(
-                        width: double.infinity,
-                        child:
-                            isInCart
-                                ? _buildQuantityControls(
-                                  product,
-                                  quantity,
-                                  cartServices,
-                                )
-                                : _buildAddToCartButton(
-                                  product,
-                                  cartServices,
-                                  context,
-                                ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+                    // Description
+                    Expanded(
+                      child: Text(
+                        doc['description'] ?? '',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey.shade700,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
 
-  Widget _buildProductImage(dynamic doc) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-      child: Stack(
-        children: [
-          Image.network(
-            doc["image"] ?? '',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: 140,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return Container(
-                height: 140,
-                width: double.infinity,
-                color: Colors.grey.shade200,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    value:
-                        loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                    color: Colors.yellow.shade800,
-                    strokeWidth: 3,
-                  ),
-                ),
-              );
-            },
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                height: 140,
-                width: double.infinity,
-                color: Colors.grey.shade200,
-                child: const Icon(
-                  Icons.image_not_supported,
-                  color: Colors.grey,
-                  size: 50,
-                ),
-              );
-            },
-          ),
-          // Category badge
-          Positioned(
-            top: 8,
-            left: 8,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.yellow.shade800,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Text(
-                doc['category'] ?? widget.category,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
+                    // Add to cart button - use Consumer only for this part
+                    Consumer<CartServices>(
+                      builder: (context, cartServices, _) {
+                        final isInCart = cartServices.isInCart(product.id);
+                        final quantity = cartServices.getQuantity(product.id);
+
+                        return SizedBox(
+                          width: double.infinity,
+                          child:
+                              isInCart
+                                  ? _buildQuantityControls(
+                                    product,
+                                    quantity,
+                                    cartServices,
+                                  )
+                                  : _buildAddToCartButton(
+                                    product,
+                                    cartServices,
+                                    context,
+                                  ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
