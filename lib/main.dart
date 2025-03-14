@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:auth_screens/Controllers/API%20Services/Chatbot/chat_bot_controller.dart';
 import 'package:auth_screens/Controllers/API%20Services/Thrift%20Store/api_services.dart';
-import 'package:auth_screens/Controllers/Database/database_services.dart';
+import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/View/Auth%20Gate/auth_gate.dart';
 import 'package:auth_screens/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,7 +33,7 @@ Future<void> main() async {
                       create: (context) => ChatbotController(),
                     ),
                     ChangeNotifierProvider(
-                      create: (context) => DatabaseServices(),
+                      create: (context) => InterfaceController(),
                     ),
                     ChangeNotifierProvider(create: (context) => ApiServices()),
                   ],

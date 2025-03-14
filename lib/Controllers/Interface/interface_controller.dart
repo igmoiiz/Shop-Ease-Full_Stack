@@ -1,6 +1,9 @@
-class InterfaceController {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
+class InterfaceController extends ChangeNotifier {
   //  List of images for carousel view on interface page
-  List<String> carouselItems = [
+  final List<String> _carouselItems = [
     "Assets/Carousel/carousel1.jpg",
     "Assets/Carousel/carousel2.jpg",
     "Assets/Carousel/carousel3.jpg",
@@ -9,7 +12,7 @@ class InterfaceController {
   ];
 
   //  List of images for large category tiles on interface page
-  List<String> largeCategoryItems = [
+  final List<String> _largeCategoryItems = [
     "Assets/Categories/Clothing.jpeg",
     "Assets/Categories/Cosmetics.jpeg",
     "Assets/Categories/Female Footwear.jpeg",
@@ -23,7 +26,7 @@ class InterfaceController {
   ];
 
   //  List of titles for large category tiles on interface page
-  List<String> largeCategoryTitles = [
+  final List<String> _largeCategoryTitles = [
     "Clothing",
     "Cosmetics",
     "Female Footwear",
@@ -35,4 +38,13 @@ class InterfaceController {
     "Furniture",
     "Smoke",
   ];
+
+  //  Instance for Firebase Firestore
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+
+  //  Getters
+  FirebaseFirestore get fireStore => _fireStore;
+  List<String> get largeCategoryTitles => _largeCategoryTitles;
+  List<String> get largeCategoryItems => _largeCategoryItems;
+  List<String> get carouselItems => _carouselItems;
 }

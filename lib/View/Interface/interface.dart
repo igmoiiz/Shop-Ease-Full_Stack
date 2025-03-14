@@ -209,7 +209,12 @@ class _InterfacePageState extends State<InterfacePage> {
                 CategoryTile(
                   icon: Icons.electrical_services,
                   text: "Electric Accesssories",
-                  onPressed: () {},
+                  onPressed:
+                      () => Navigator.of(context).push(
+                        _elegantRoute(
+                          FeaturedProducts(category: "Electronic Accessories"),
+                        ),
+                      ),
                 ),
                 CategoryTile(
                   icon: Icons.shopping_bag_outlined,
@@ -223,7 +228,12 @@ class _InterfacePageState extends State<InterfacePage> {
                 CategoryTile(
                   icon: Icons.house,
                   text: "Household Products",
-                  onPressed: () {},
+                  onPressed:
+                      () => Navigator.of(context).push(
+                        _elegantRoute(
+                          FeaturedProducts(category: "Household Products"),
+                        ),
+                      ),
                 ),
               ],
             ),
@@ -254,9 +264,15 @@ class _InterfacePageState extends State<InterfacePage> {
                       backgroundImage:
                           interfaceController.largeCategoryItems[index],
                       onTap:
-                          () => Navigator.of(
-                            context,
-                          ).push(_elegantRoute(FeaturedProducts())),
+                          () => Navigator.of(context).push(
+                            _elegantRoute(
+                              FeaturedProducts(
+                                category:
+                                    interfaceController
+                                        .largeCategoryTitles[index],
+                              ),
+                            ),
+                          ),
                       title: interfaceController.largeCategoryTitles[index],
                     ),
                   );
