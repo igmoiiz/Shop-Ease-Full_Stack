@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:auth_screens/Controllers/Cart%20Services/cart_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +37,7 @@ Future<void> main() async {
                       create: (context) => InterfaceController(),
                     ),
                     ChangeNotifierProvider(create: (context) => ApiServices()),
+                    ChangeNotifierProvider(create: (context) => CartServices()),
                   ],
                   child: const MainApp(),
                 ),

@@ -3,9 +3,12 @@
 import 'package:auth_screens/Controllers/Database/database_services.dart';
 import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
+import 'package:auth_screens/View/Cart/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:auth_screens/Controllers/Cart%20Services/cart_services.dart';
+import 'package:auth_screens/Model/featured_product_model.dart';
 
 class FeaturedProducts extends StatelessWidget {
   final String category;
@@ -18,6 +21,7 @@ class FeaturedProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final cartServices = Provider.of<CartServices>(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
@@ -168,6 +172,16 @@ class FeaturedProducts extends StatelessWidget {
                             ),
                         itemBuilder: (context, index) {
                           final data = snapshot.data!.docs[index];
+                          final product = FeaturedProduct(
+                            id: data.id,
+                            title: data['title'] ?? '',
+                            image: data['image'] ?? '',
+                            price: (data['price'] ?? 0.0).toDouble(),
+                            description: data['description'] ?? '',
+                            category: data['category'] ?? category,
+                          );
+                          final isInCart = cartServices.isInCart(product.id);
+                          final quantity = cartServices.getQuantity(product.id);
                           return Card(
                             elevation: 2,
                             shadowColor: Colors.black26,
@@ -324,28 +338,151 @@ class FeaturedProducts extends StatelessWidget {
                                         // Add to cart button
                                         SizedBox(
                                           width: double.infinity,
-                                          child: ElevatedButton.icon(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              Icons.add_shopping_cart,
-                                              size: 16,
-                                            ),
-                                            label: const Text("Add to Cart"),
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  Colors.yellow.shade800,
-                                              foregroundColor: Colors.white,
-                                              elevation: 2,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                    vertical: 8,
+                                          child:
+                                              isInCart
+                                                  ? Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Container(
+                                                          height: 36,
+                                                          decoration: BoxDecoration(
+                                                            color:
+                                                                Colors
+                                                                    .yellow
+                                                                    .shade800,
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  8,
+                                                                ),
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              IconButton(
+                                                                icon: const Icon(
+                                                                  Icons.remove,
+                                                                  color:
+                                                                      Colors
+                                                                          .white,
+                                                                  size: 16,
+                                                                ),
+                                                                onPressed:
+                                                                    () => cartServices
+                                                                        .decrementQuantity(
+                                                                          product
+                                                                              .id,
+                                                                        ),
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                constraints:
+                                                                    const BoxConstraints(),
+                                                              ),
+                                                              Text(
+                                                                quantity
+                                                                    .toString(),
+                                                                style: const TextStyle(
+                                                                  color:
+                                                                      Colors
+                                                                          .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                              IconButton(
+                                                                icon: const Icon(
+                                                                  Icons.add,
+                                                                  color:
+                                                                      Colors
+                                                                          .white,
+                                                                  size: 16,
+                                                                ),
+                                                                onPressed:
+                                                                    () => cartServices
+                                                                        .incrementQuantity(
+                                                                          product
+                                                                              .id,
+                                                                        ),
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                constraints:
+                                                                    const BoxConstraints(),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                  : ElevatedButton.icon(
+                                                    onPressed: () {
+                                                      // Add to cart with animation
+                                                      cartServices.addToCart(
+                                                        product,
+                                                      );
+
+                                                      // Show a snackbar
+                                                      ScaffoldMessenger.of(
+                                                        context,
+                                                      ).showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            '${product.title} added to cart',
+                                                          ),
+                                                          duration:
+                                                              const Duration(
+                                                                seconds: 2,
+                                                              ),
+                                                          action: SnackBarAction(
+                                                            label: 'View Cart',
+                                                            onPressed: () {
+                                                              // Navigate to cart page
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (
+                                                                        context,
+                                                                      ) =>
+                                                                          CartPage(),
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                    icon: const Icon(
+                                                      Icons.add_shopping_cart,
+                                                      size: 16,
+                                                    ),
+                                                    label: const Text(
+                                                      "Add to Cart",
+                                                    ),
+                                                    style: ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          Colors
+                                                              .yellow
+                                                              .shade800,
+                                                      foregroundColor:
+                                                          Colors.white,
+                                                      elevation: 2,
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              8,
+                                                            ),
+                                                      ),
+                                                      padding:
+                                                          const EdgeInsets.symmetric(
+                                                            vertical: 8,
+                                                          ),
+                                                    ),
                                                   ),
-                                            ),
-                                          ),
                                         ),
                                       ],
                                     ),

@@ -3,6 +3,7 @@
 import 'package:auth_screens/Controllers/Authentication/auth_services.dart';
 import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/View/ChatBot/chatbot_page.dart';
+import 'package:auth_screens/View/Components/cart_icon.dart';
 import 'package:auth_screens/View/Components/category_tile.dart';
 import 'package:auth_screens/View/Components/large_category_tile.dart';
 import 'package:auth_screens/View/Interface/Featured%20Categories/featured_products.dart';
@@ -10,6 +11,9 @@ import 'package:auth_screens/View/Interface/product_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:auth_screens/Controllers/Cart%20Services/cart_services.dart';
+import 'package:auth_screens/View/Cart/cart_page.dart';
+import 'package:provider/provider.dart';
 
 class InterfacePage extends StatefulWidget {
   const InterfacePage({super.key});
@@ -29,7 +33,7 @@ class _InterfacePageState extends State<InterfacePage> {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      endDrawer: Drawer(
+      drawer: Drawer(
         backgroundColor: Colors.grey.shade100,
         child: Column(
           children: [
@@ -123,7 +127,7 @@ class _InterfacePageState extends State<InterfacePage> {
       appBar: AppBar(
         backgroundColor: Colors.grey.shade100,
         iconTheme: IconThemeData(color: Colors.yellow.shade800),
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         elevation: 0.0,
         title: Row(
           children: [
@@ -147,6 +151,7 @@ class _InterfacePageState extends State<InterfacePage> {
             ),
           ],
         ),
+        actions: [CartIcon()],
       ),
 
       //  BODY
