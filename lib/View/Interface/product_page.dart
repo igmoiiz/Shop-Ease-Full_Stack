@@ -7,7 +7,6 @@ import 'package:auth_screens/View/Cart/cart_page.dart';
 import 'package:auth_screens/View/Components/cart_icon.dart';
 import 'package:auth_screens/View/Interface/product_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:auth_screens/Controllers/Cart%20Services/cart_services.dart';
