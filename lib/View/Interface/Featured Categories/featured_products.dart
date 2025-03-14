@@ -6,6 +6,7 @@ import 'package:auth_screens/Controllers/Database/database_services.dart';
 import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
 import 'package:auth_screens/View/Cart/cart_page.dart';
+import 'package:auth_screens/View/Components/cart_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -91,6 +92,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
             ),
           ],
         ),
+        actions: [CartIcon()],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
