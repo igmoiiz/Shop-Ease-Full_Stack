@@ -1,6 +1,6 @@
 # ShopEase - Flutter E-Commerce Application
 
-![ShopEase Logo](https://your-image-link-here.com/logo.png)
+![ShopEase Logo](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/public/icon//ShopEase.jpg)
 
 ## 📱 Overview
 
@@ -169,9 +169,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter) - email@example.com
+Moiz Baloch - [@ig_moiiz](https://www.instagram.com/ig_moiiz/) - khanmoaiz682@gmail.com
 
-Project Link: [https://github.com/your-username/shop-ease](https://github.com/your-username/shop-ease)
+Project Link: [https://github.com/igmoiiz/Shop-Ease-Full_Stack.git](https://github.com/igmoiiz/Shop-Ease-Full_Stack.git)
 
 ## 🙏 Acknowledgments
 
@@ -183,4 +183,4 @@ Project Link: [https://github.com/your-username/shop-ease](https://github.com/yo
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by Moiz Baloch
