@@ -59,7 +59,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: GoogleFonts.poppins().fontFamily,
+        fontFamily: GoogleFonts.outfit().fontFamily,
         useMaterial3: true,
       ),
       home: const AuthGate(),

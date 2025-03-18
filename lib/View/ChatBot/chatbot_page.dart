@@ -46,29 +46,19 @@ class _ChatbotPageState extends State<ChatbotPage> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.yellow.shade700,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/drawer_header_bg.jpg'),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.6),
-                    BlendMode.darken,
-                  ),
-                ),
-              ),
+              decoration: BoxDecoration(color: Colors.yellow.shade700),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    "QUORION",
+                    "Shop Ease",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.grey.shade900.withOpacity(0.8),
                       letterSpacing: 2,
                       fontSize: height * 0.03,
                       fontWeight: FontWeight.bold,
-                      fontFamily: GoogleFonts.cinzel().fontFamily,
+                      fontFamily: GoogleFonts.playfairDisplay().fontFamily,
                     ),
                   ),
                   Text(
@@ -109,13 +99,13 @@ class _ChatbotPageState extends State<ChatbotPage> {
             ),
             SizedBox(width: 10),
             Text(
-              "Quorion".toUpperCase(),
+              "Shop Ease".toUpperCase(),
               style: TextStyle(
                 color: Colors.yellow.shade800,
                 letterSpacing: 1.5,
                 fontSize: height * 0.025,
                 fontWeight: FontWeight.bold,
-                fontFamily: GoogleFonts.cinzel().fontFamily,
+                fontFamily: GoogleFonts.playfairDisplay().fontFamily,
               ),
             ),
           ],
@@ -180,7 +170,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
                                     ),
                                     SizedBox(width: 5),
                                     Text(
-                                      "QUORION",
+                                      "Shop Ease",
                                       style: TextStyle(
                                         color: Colors.yellow.shade800,
                                         fontSize: 12.0,

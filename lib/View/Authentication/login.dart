@@ -4,6 +4,7 @@ import 'package:auth_screens/Controllers/Authentication/auth_services.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
 import 'package:auth_screens/View/Authentication/register.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -147,6 +148,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -257,9 +259,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 Center(
                                   child: Text(
                                     'Sign In',
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.headlineMedium?.copyWith(
+                                    style: TextStyle(
+                                      fontFamily:
+                                          GoogleFonts.italiana().fontFamily,
+                                      fontSize: height * 0.038,
                                       fontWeight: FontWeight.bold,
                                       color:
                                           Theme.of(
@@ -273,6 +276,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                   child: Text(
                                     'Welcome back you\'ve been missed!',
                                     style: TextStyle(
+                                      fontFamily:
+                                          GoogleFonts.montserrat().fontFamily,
                                       fontSize: 14,
                                       color: Theme.of(context)
                                           .colorScheme

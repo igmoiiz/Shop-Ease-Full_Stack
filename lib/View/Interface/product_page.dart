@@ -220,7 +220,7 @@ class _ProductPageState extends State<ProductPage> {
           Text(
             "Thrift Store",
             style: TextStyle(
-              fontFamily: GoogleFonts.lobsterTwo().fontFamily,
+              fontFamily: GoogleFonts.playfairDisplay().fontFamily,
               color: Colors.yellow.shade800,
               fontWeight: FontWeight.bold,
               letterSpacing: .5,

@@ -85,7 +85,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
             Text(
               widget.category,
               style: TextStyle(
-                fontFamily: GoogleFonts.urbanist().fontFamily,
+                fontFamily: GoogleFonts.playfairDisplay().fontFamily,
                 color: Colors.yellow.shade800,
                 fontWeight: FontWeight.bold,
                 letterSpacing: .5,

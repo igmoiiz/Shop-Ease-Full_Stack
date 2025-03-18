@@ -4,6 +4,7 @@ import 'package:auth_screens/Controllers/Authentication/auth_services.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
 import 'package:auth_screens/View/Authentication/login.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -159,6 +160,7 @@ class _RegisterPageState extends State<RegisterPage>
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -269,14 +271,11 @@ class _RegisterPageState extends State<RegisterPage>
                                 Center(
                                   child: Text(
                                     'Sign Up',
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.headlineMedium?.copyWith(
+                                    style: TextStyle(
+                                      fontSize: height * 0.038,
+                                      fontFamily:
+                                          GoogleFonts.italiana().fontFamily,
                                       fontWeight: FontWeight.bold,
-                                      color:
-                                          Theme.of(
-                                            context,
-                                          ).colorScheme.onBackground,
                                     ),
                                   ),
                                 ),
@@ -286,6 +285,8 @@ class _RegisterPageState extends State<RegisterPage>
                                     'Shop in Ease with ShopEase',
                                     style: TextStyle(
                                       fontSize: 14,
+                                      fontFamily:
+                                          GoogleFonts.montserrat().fontFamily,
                                       color: Theme.of(context)
                                           .colorScheme
                                           .onBackground
