@@ -4,6 +4,7 @@ import 'package:auth_screens/Controllers/API%20Services/Chatbot/chat_bot_control
 import 'package:auth_screens/Controllers/API%20Services/Thrift%20Store/api_services.dart';
 import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/View/Auth%20Gate/auth_gate.dart';
+import 'package:auth_screens/consts.dart';
 import 'package:auth_screens/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:auth_screens/Controllers/Cart%20Services/cart_services.dart';
 
 Future<void> main() async {
+  //  Initialize the Widget Binding
   WidgetsFlutterBinding.ensureInitialized();
-  //  Supabase Variables
-  const url = "https://vfazqatlbiewmmsbiboh.supabase.co";
-  const anonKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmYXpxYXRsYmlld21tc2JpYm9oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE3MDU3NzEsImV4cCI6MjA1NzI4MTc3MX0.dc8TlRM38luvir8W4d7F0bN2DcmzmBzEvpOxsf-yFUE";
   //  Firebase Setup
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {

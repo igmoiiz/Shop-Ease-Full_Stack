@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class InterfaceController extends ChangeNotifier {
+  //
+  String aboutApplicaiton =
+      "ShopEase is a full-featured e-commerce mobile application built with Flutter that delivers a seamless shopping experience. The app provides users with a comprehensive platform to browse products, manage their shopping cart, and complete purchases with ease.";
   //  List of images for carousel view on interface page
   final List<String> _carouselItems = [
     "Assets/Carousel/carousel1.jpg",
@@ -9,6 +12,10 @@ class InterfaceController extends ChangeNotifier {
     "Assets/Carousel/carousel3.jpg",
     "Assets/Carousel/carousel4.jpg",
     "Assets/Carousel/carousel5.jpg",
+    "Assets/Carousel/carousel6.jpg",
+    "Assets/Carousel/carousel7.jpg",
+    "Assets/Carousel/carousel8.jpg",
+    "Assets/Carousel/carousel9.jpg",
   ];
 
   //  List of images for large category tiles on interface page

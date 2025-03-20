@@ -9,6 +9,7 @@ import 'package:auth_screens/View/Components/category_tile.dart';
 import 'package:auth_screens/View/Components/drawer_component.dart';
 import 'package:auth_screens/View/Components/large_category_tile.dart';
 import 'package:auth_screens/View/Interface/Featured%20Categories/featured_products.dart';
+import 'package:auth_screens/View/Interface/about_page.dart';
 import 'package:auth_screens/View/Interface/product_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,17 @@ class _InterfacePageState extends State<InterfacePage> {
                   Navigator.of(context).pop();
                 }),
             subtitle: "See what's in your wishlist",
+          ),
+          DrawerComponent(
+            title: "About Us",
+            icon: Icons.info_outline,
+            onTap:
+                () => Navigator.of(
+                  context,
+                ).push(_elegantRoute(AboutPage())).then((value) {
+                  Navigator.of(context).pop();
+                }),
+            subtitle: "Know more about us",
           ),
           const Spacer(),
           const Divider(),
@@ -227,7 +239,7 @@ class _InterfacePageState extends State<InterfacePage> {
           Text(
             "New Arrivals",
             style: TextStyle(
-              color: Colors.black.withOpacity(0.65),
+              color: Colors.yellow.shade900,
               fontWeight: FontWeight.bold,
               letterSpacing: .5,
               fontSize: size.height * 0.03,
@@ -240,11 +252,20 @@ class _InterfacePageState extends State<InterfacePage> {
             children: [
               CategoryTile(
                 icon: Icons.electrical_services,
-                text: "Electric Accesssories",
+                text: "Electronics",
+                onPressed:
+                    () => Navigator.of(context).push(
+                      _elegantRoute(FeaturedProducts(category: "Electronics")),
+                    ),
+              ),
+
+              CategoryTile(
+                icon: Icons.house,
+                text: "Household Products",
                 onPressed:
                     () => Navigator.of(context).push(
                       _elegantRoute(
-                        FeaturedProducts(category: "Electronic Accessories"),
+                        FeaturedProducts(category: "Household Products"),
                       ),
                     ),
               ),
@@ -257,23 +278,13 @@ class _InterfacePageState extends State<InterfacePage> {
                   ).push(_elegantRoute(ProductPage(title: "Thrift Store")));
                 },
               ),
-              CategoryTile(
-                icon: Icons.house,
-                text: "Household Products",
-                onPressed:
-                    () => Navigator.of(context).push(
-                      _elegantRoute(
-                        FeaturedProducts(category: "Household Products"),
-                      ),
-                    ),
-              ),
             ],
           ),
           SizedBox(height: size.height * 0.02),
           Text(
             "Featured Categories",
             style: TextStyle(
-              color: Colors.black.withOpacity(0.65),
+              color: Colors.yellow.shade900,
               fontWeight: FontWeight.bold,
               letterSpacing: .5,
               fontSize: size.height * 0.03,
