@@ -8,7 +8,6 @@ import 'package:auth_screens/consts.dart';
 import 'package:auth_screens/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:auth_screens/Controllers/Cart%20Services/cart_services.dart';
@@ -37,7 +36,7 @@ Future<void> main() async {
                     ChangeNotifierProvider(create: (context) => ApiServices()),
                     ChangeNotifierProvider(create: (context) => CartServices()),
                   ],
-                  child: const MainApp(),
+                  child: const MyApp(),
                 ),
               );
             })
@@ -50,15 +49,17 @@ Future<void> main() async {
       });
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'ShopEase',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: GoogleFonts.outfit().fontFamily,
-        useMaterial3: true,
+        primarySwatch: Colors.amber,
+        scaffoldBackgroundColor: Colors.grey.shade100,
       ),
       home: const AuthGate(),
     );
