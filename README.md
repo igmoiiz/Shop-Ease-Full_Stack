@@ -4,7 +4,7 @@
 
 ## 📱 Overview
 
-ShopEase is a full-featured e-commerce mobile application built with Flutter that delivers a seamless shopping experience. The app provides users with a comprehensive platform to browse products, manage their shopping cart, and complete purchases with ease.
+ShopEase is a full-featured e-commerce mobile application built with Flutter that delivers a seamless shopping experience. The app provides users with a comprehensive platform to browse products, manage their shopping cart, and complete purchases with ease. Our integrated AI-powered chatbot assistant helps users with product recommendations, answers questions, and provides support throughout their shopping journey.
 
 ## ✨ Features
 
@@ -35,6 +35,14 @@ ShopEase is a full-featured e-commerce mobile application built with Flutter tha
 - Real-time price calculation
 - Save items for later
 
+### AI Chatbot Assistant
+
+- Smart AI-powered shopping assistant using Gemini 1.5 Flash
+- Personalized product recommendations and shopping advice
+- Answers customer questions about products, orders, and shopping
+- Persistent conversation history for continued assistance
+- Markdown support for rich text responses
+
 ### Checkout Process
 
 - Multiple payment methods
@@ -49,15 +57,52 @@ ShopEase is a full-featured e-commerce mobile application built with Flutter tha
 - Light/dark theme support
 - Offline capabilities
 
+## 🖼️ Application Preview
+
+### Application Interface
+![Main Screen](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%201.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyAxLmpwZyIsImlhdCI6MTc0MjU5MjY5MywiZXhwIjoxNzUxMDU5MjY5M30.m5lTeZJ0MgVPZwPIyffseFTJ1MXC0EgqSYmntwlP9X0)
+
+![Products Screen](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%202.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyAyLmpwZyIsImlhdCI6MTc0MjU5Mjc5NywiZXhwIjoxNzUxMDU5Mjc5N30.SVeXpBMItclEP0w1NhyaoLudqo3UkHRgpdEyiWgHJ2o)
+
+![Product Details](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%208.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyA4LmpwZyIsImlhdCI6MTc0MjU5MjkzOCwiZXhwIjoxNzUxMDU5MjkzOH0.38uRS2m2X9jyrndJMXlEpqrlI6Pn9hDZ6dheQLv1hZc)
+
+![Cart Interface](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%203.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyAzLmpwZyIsImlhdCI6MTc0MjU5MzA5MywiZXhwIjoxNzUxMDU5MzA5M30.EbmjoMYi07WKOyYANH_DgPEDdwV_EbalYWSx7qmQFaU)
+
+![Chatbot Interface](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%204.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyA0LmpwZyIsImlhdCI6MTc0MjU5MzExOCwiZXhwIjoxNzUxMDU5MzExOH0.S2V_ebdJbAPnwU8nAilY9lBTmIIy7XA9rvoxWFo27DE)
+
+![About ShopEase](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%205.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyA1LmpwZyIsImlhdCI6MTc0MjU5MzEzOCwiZXhwIjoxNzUxMDU5MzEzOH0.W73bYgSh-TDTiCarFayI_2ScLXSpr7WMB1GLGDtpI6g)
+
+![Key Features](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%206.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyA2LmpwZyIsImlhdCI6MTc0MjU5MzE1NCwiZXhwIjoxNzUxMDU5MzE1NH0.iQT9e-8FnfuE1fcqPxq3XF7GZINwQRi6WXJnJGlScT8)
+
+![Technologies Used & Developer](https://vfazqatlbiewmmsbiboh.supabase.co/storage/v1/object/sign/application-preview/App%20SS%207.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcHBsaWNhdGlvbi1wcmV2aWV3L0FwcCBTUyA3LmpwZyIsImlhdCI6MTc0MjU5MzIwMiwiZXhwIjoxNzUxMDU5MzIwMn0.vKaTkl0I46uMz_KryHIcoRNZPLzfSGP2s-lRr1Lo8pE)
+
 ## 🛠️ Technologies
 
 - **Frontend**: Flutter, Dart
 - **State Management**: Provider
-- **Backend**: Firebase
-- **Database**: Cloud Firestore
+- **Backend**: Firebase, Supabase
+- **Database**: Cloud Firestore, Supabase PostgreSQL
 - **Authentication**: Firebase Authentication
-- **Storage**: Firebase Storage
+- **Storage**: Firebase Storage, Supabase Storage
+- **AI Integration**: Google Gemini 1.5 Flash
 - **API Integration**: REST APIs
+
+## 🚀 Recent Updates
+
+### v1.2.0: AI Assistant Update
+- Added intelligent AI chatbot assistant powered by Gemini 1.5 Flash
+- Implemented conversation history with Supabase database integration
+- Enhanced UI with markdown support for rich text in bot responses
+- Added conversation management (rename, delete) functionality
+- Fixed message ordering and optimized drawer layout
+- Added proper timestamps for messages with intelligent formatting
+
+### v1.1.0: UI Enhancements
+- Improved product card layouts and animations
+- Enhanced product details screen with smoother transitions
+- Updated cart interface with improved user experience
+- Fixed various layout and performance issues
+- Added loading indicators and optimized image loading
 
 ## 🚀 Getting Started
 
@@ -68,6 +113,7 @@ ShopEase is a full-featured e-commerce mobile application built with Flutter tha
 - Android Studio / VS Code
 - Android Emulator / iOS Simulator or physical device
 - Firebase account
+- Supabase account (for chatbot functionality)
 
 ### Installation
 
@@ -91,7 +137,13 @@ flutter pub get
    - Download and add the `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) files
    - Enable Authentication, Firestore, and Storage in Firebase console
 
-4. Run the app
+4. Configure Supabase
+
+   - Create a new Supabase project
+   - Set up tables for chat history (chat_history and chat_messages)
+   - Add your Supabase URL and anonymous key to the project
+
+5. Run the app
 
 ```bash
 flutter run
@@ -103,6 +155,9 @@ flutter run
 lib/
 ├── Controllers/
 │   ├── API Services/
+│   │   ├── Chatbot/
+│   │   │   ├── chat_bot_controller.dart
+│   │   │   └── chat_history_service.dart
 │   ├── Authentication/
 │   ├── Cart Services/
 │   ├── Database/
@@ -114,6 +169,8 @@ lib/
 ├── View/
 │   ├── Authentication/
 │   ├── Cart/
+│   ├── ChatBot/
+│   │   └── chatbot_page.dart
 │   ├── Components/
 │   └── Interface/
 │       ├── Featured Categories/
@@ -153,6 +210,15 @@ Cart functionality is handled by the CartServices controller, allowing users to 
 cartServices.addToCart(product, quantity: 1);
 ```
 
+### Using the Chatbot
+
+The AI-powered chatbot provides product recommendations and answers questions.
+
+```dart
+// Example: Sending a message to the chatbot
+await chatbotController.fetchResponse("Tell me about the latest shoes");
+```
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -177,8 +243,11 @@ Project Link: [https://github.com/igmoiiz/Shop-Ease-Full_Stack.git](https://gith
 
 - [Flutter](https://flutter.dev/)
 - [Firebase](https://firebase.google.com/)
+- [Supabase](https://supabase.io/)
+- [Google Gemini](https://ai.google.dev/)
 - [Provider Package](https://pub.dev/packages/provider)
 - [Google Fonts](https://pub.dev/packages/google_fonts)
+- [Flutter Markdown](https://pub.dev/packages/flutter_markdown)
 - All the amazing contributors and the Flutter community
 
 ---
