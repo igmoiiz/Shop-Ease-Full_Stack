@@ -186,7 +186,7 @@ class ChatbotController extends ChangeNotifier {
         if (messages.length == 2) {
           // Extract a title from the first user message
           String title =
-              message.length > 30 ? message.substring(0, 27) + '...' : message;
+              message.length > 30 ? '${message.substring(0, 27)}...' : message;
           await renameChat(_currentChatId!, title);
         }
       } else {
