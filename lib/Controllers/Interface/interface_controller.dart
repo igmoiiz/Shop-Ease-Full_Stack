@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class InterfaceController extends ChangeNotifier {
   //
   String aboutApplicaiton =
-      "ShopEase is a full-featured e-commerce mobile application built with Flutter that delivers a seamless shopping experience. The app provides users with a comprehensive platform to browse products, manage their shopping cart, and complete purchases with ease.";
+      "ShopEase is a full-featured e-commerce mobile application built with Flutter that delivers a seamless shopping experience. The app provides users with a comprehensive platform to browse products, manage their shopping cart, and complete purchases with ease. Our integrated AI-powered chatbot assistant helps users with product recommendations, answers questions, and provides support throughout their shopping journey while maintaining a conversation history for continuity.";
   //  List of images for carousel view on interface page
   final List<String> _carouselItems = [
     "Assets/Carousel/carousel1.jpg",

@@ -186,6 +186,13 @@ class AboutPage extends StatelessWidget {
                       ),
                       _buildDivider(),
                       _buildFeatureItem(
+                        icon: Icons.psychology,
+                        title: "AI Chatbot Assistant",
+                        description:
+                            "Smart AI-powered support with conversation history",
+                      ),
+                      _buildDivider(),
+                      _buildFeatureItem(
                         icon: Icons.auto_awesome,
                         title: "User Experience",
                         description: "Smooth animations and responsive design",
