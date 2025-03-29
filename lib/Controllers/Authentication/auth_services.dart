@@ -123,6 +123,54 @@ class AuthServices {
     }
   }
 
+  //  Method for restoring password
+  Future<void> restorePassword(String email, BuildContext context) async {
+    final navigator = Navigator.of(context);
+    try {
+      await supabase.auth
+          .resetPasswordForEmail(email)
+          .then((value) {
+            log("Password Reset Link Sent");
+            showAdaptiveDialog(
+              context: context,
+              builder:
+                  (context) => AlertDialog(
+                    title: const Text('Password Reset'),
+                    content: const Text(
+                      'A password reset link has been sent to your email',
+                    ),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () => navigator.pop(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text(
+                          "Dismiss",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: .5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+            );
+          })
+          .onError((error, stackTrace) {
+            log("Error: $error");
+            throw Exception("Error Occurred!");
+          });
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
   //  Getting current User email
   String? getCurrentUserEmail() {
     final session = supabase.auth.currentSession;

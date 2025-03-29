@@ -2,6 +2,7 @@
 
 import 'package:auth_screens/Controllers/Authentication/auth_services.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
+import 'package:auth_screens/View/Authentication/forgot_password.dart';
 import 'package:auth_screens/View/Authentication/register.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -341,7 +342,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                   alignment: Alignment.centerRight,
                                   child: TextButton(
                                     onPressed: () {
-                                      // Handle forgot password
+                                      Navigator.of(
+                                        context,
+                                      ).push(_elegantRoute(ForgotPassword()));
                                     },
                                     style: TextButton.styleFrom(
                                       foregroundColor: Colors.yellow.shade800,
@@ -530,6 +533,23 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
           color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
         ),
       ),
+    );
+  }
+
+  PageRouteBuilder _elegantRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var fadeAnimation = Tween<double>(begin: 0, end: 1).animate(animation);
+        var scaleAnimation = Tween<double>(begin: 0.95, end: 1).animate(
+          CurvedAnimation(parent: animation, curve: Curves.easeOutExpo),
+        );
+        return FadeTransition(
+          opacity: fadeAnimation,
+          child: ScaleTransition(scale: scaleAnimation, child: child),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 }
