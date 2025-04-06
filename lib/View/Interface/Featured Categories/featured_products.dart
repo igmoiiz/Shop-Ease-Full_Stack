@@ -283,6 +283,7 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
       price: (doc['price'] ?? 0.0).toDouble(),
       description: doc['description'] ?? '',
       category: doc['category'] ?? widget.category,
+      // brandName: doc['brandName'] ?? "Anonymous",
     );
 
     // Use Consumer only for the part that needs to rebuild
@@ -412,8 +413,8 @@ class _FeaturedProductsState extends State<FeaturedProducts> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 6),
 
+                    const SizedBox(height: 6),
                     // Price
                     Text(
                       "Rs.${doc['price'] ?? 0.0}",

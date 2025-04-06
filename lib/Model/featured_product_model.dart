@@ -7,6 +7,7 @@ class FeaturedProduct {
   final double price;
   final String description;
   final String category;
+  // final String brandName;
 
   FeaturedProduct({
     required this.id,
@@ -15,6 +16,7 @@ class FeaturedProduct {
     required this.price,
     required this.description,
     required this.category,
+    // required this.brandName,
   });
 
   factory FeaturedProduct.fromFirestore(DocumentSnapshot doc) {
@@ -26,6 +28,7 @@ class FeaturedProduct {
       price: (data['price'] ?? 0.0).toDouble(),
       description: data['description'] ?? '',
       category: data['category'] ?? '',
+      // brandName: data['brandName'] ?? '',
     );
   }
 }
