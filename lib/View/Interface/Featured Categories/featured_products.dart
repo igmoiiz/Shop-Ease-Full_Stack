@@ -2,7 +2,6 @@
 
 import 'dart:async';
 
-import 'package:auth_screens/Controllers/Database/database_services.dart';
 import 'package:auth_screens/Controllers/Interface/interface_controller.dart';
 import 'package:auth_screens/Controllers/input_controllers.dart';
 import 'package:auth_screens/View/Cart/cart_page.dart';
@@ -25,8 +24,6 @@ class FeaturedProducts extends StatefulWidget {
 class _FeaturedProductsState extends State<FeaturedProducts> {
   //  Instance for Input Controller
   final InputControllers inputController = InputControllers();
-  //  Instance for Database Services
-  final DatabaseServices databaseServices = DatabaseServices();
 
   // Add search functionality
   String _searchQuery = '';
