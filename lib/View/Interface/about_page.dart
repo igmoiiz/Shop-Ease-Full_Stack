@@ -340,53 +340,53 @@ class AboutPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // _buildDivider(),
-                      // Row(
-                      //   children: [
-                      //     Container(
-                      //       width: 60,
-                      //       height: 60,
-                      //       decoration: BoxDecoration(
-                      //         color: Colors.yellow.shade800.withOpacity(0.2),
-                      //         shape: BoxShape.circle,
-                      //       ),
-                      //       child: Center(
-                      //         child: Text(
-                      //           "AB",
-                      //           style: TextStyle(
-                      //             fontSize: 24,
-                      //             fontWeight: FontWeight.bold,
-                      //             color: Colors.yellow.shade800,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: 16),
-                      //     Expanded(
-                      //       child: Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: [
-                      //           Text(
-                      //             "Aima Bilal",
-                      //             style: TextStyle(
-                      //               fontSize: 18,
-                      //               fontWeight: FontWeight.bold,
-                      //               fontFamily: GoogleFonts.outfit().fontFamily,
-                      //             ),
-                      //           ),
-                      //           const SizedBox(height: 4),
-                      //           Text(
-                      //             "Flutter Developer",
-                      //             style: TextStyle(
-                      //               fontSize: 14,
-                      //               color: Colors.grey.shade700,
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                      _buildDivider(),
+                      Row(
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Colors.yellow.shade800.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "AB",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.yellow.shade800,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Aimah Bilal",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: GoogleFonts.outfit().fontFamily,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  "Flutter Developer",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey.shade700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
