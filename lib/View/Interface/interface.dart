@@ -264,9 +264,7 @@ class _InterfacePageState extends State<InterfacePage> {
                 text: "Household Products",
                 onPressed:
                     () => Navigator.of(context).push(
-                      _elegantRoute(
-                        FeaturedProducts(category: "Household Products"),
-                      ),
+                      _elegantRoute(FeaturedProducts(category: "Household")),
                     ),
               ),
               CategoryTile(
